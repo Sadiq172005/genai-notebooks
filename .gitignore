@@ -1,0 +1,28 @@
+# Python-generated files
+__pycache__/
+*.py[oc]
+build/
+dist/
+wheels/
+*.egg-info
+
+# Virtual environments
+.venv
+
+
+# Environment variables / secrets
+.env
+
+# Data files (optional, if you don't want to upload PDFs/vector stores)
+data/*.pdf
+data/*.csv
+data/*.jsonl
+vector_stores/
+
+
+chroma_db2/
+*.pdf
+id1.png
+id2.png
+pc1.png
+pc2.png
