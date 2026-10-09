@@ -1,0 +1,134 @@
+A **Document Loader** is a component (commonly used in LLM / RAG systems) that **reads documents from different sources and converts them into structured text format** so they can be processed by models.
+
+Since you’re working on RAG systems and legal document processing, this is especially important for you.
+
+---
+
+## 🔹 What Does a Document Loader Do?
+
+A document loader:
+
+1. **Reads files** (PDF, DOCX, TXT, JSON, CSV, HTML, etc.)
+2. **Extracts text content**
+3. **Converts it into a standard format**
+4. **Creates document objects with metadata**
+5. Passes them to:
+
+   * Text splitters
+   * Embedding models
+   * Vector databases
+
+---
+
+## 🔹 Why It Is Important in RAG (Retrieval Augmented Generation)
+
+In a RAG pipeline:
+
+```
+Raw Files → Document Loader → Text Splitter → Embeddings → Vector DB → Retriever → LLM
+```
+
+Without a document loader:
+
+* Your model cannot read PDFs
+* Cannot extract text from DOCX
+* Cannot handle structured JSON properly
+* Cannot attach metadata (like source file name, page number)
+
+---
+
+## 🔹 Example in LangChain
+
+If you're using **LangChain**, it provides multiple document loaders.
+
+Example:
+
+```python
+from langchain.document_loaders import PyPDFLoader
+
+loader = PyPDFLoader("legal_doc.pdf")
+documents = loader.load()
+
+print(documents[0].page_content)
+```
+
+Here:
+
+* `PyPDFLoader` reads the PDF
+* Converts each page into a document object
+* Adds metadata like page number
+
+---
+
+## 🔹 Common Types of Document Loaders
+
+| Loader Type      | Used For                                   |
+| ---------------- | ------------------------------------------ |
+| PDF Loader       | Extract text from PDF                      |
+| Docx Loader      | Microsoft Word files                       |
+| CSV Loader       | Structured tabular data                    |
+| JSON Loader      | Structured legal data (like your BNS JSON) |
+| Directory Loader | Load multiple files at once                |
+| Web Loader       | Scrape website content                     |
+
+---
+
+## 🔹 In Your Case (Legal RAG with BNS, IPC)
+
+You mentioned using `SimpleDirectoryReader` earlier in LlamaIndex.
+
+That is from:
+
+**LlamaIndex**
+
+Example:
+
+```python
+from llama_index.core import SimpleDirectoryReader
+
+documents = SimpleDirectoryReader("data_folder").load_data()
+```
+
+It:
+
+* Reads all files in folder
+* Extracts text
+* Converts into Document objects
+* Automatically stores metadata
+
+Perfect for:
+
+* BNS JSON
+* IPC JSON
+* Comparison files
+
+---
+
+## 🔹 Why It Matters for Large Systems
+
+For advanced systems (like your underwater, legal advisor, resume parser):
+
+A good document loader:
+
+* Preserves structure
+* Preserves page numbers
+* Handles encoding issues
+* Extracts tables
+* Supports OCR if needed
+
+---
+
+## 🔹 Simple Definition
+
+> A document loader is a bridge between raw data and AI models.
+
+Without it, your AI system cannot understand external documents.
+
+---
+
+If you want, I can also explain:
+
+* How document loaders work internally
+* How to build your own custom document loader
+* When to use PyMuPDF vs pdfminer vs OCR
+* Best loader choice for legal documents like BNS/IP C
